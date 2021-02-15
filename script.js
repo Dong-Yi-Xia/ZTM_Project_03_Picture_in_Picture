@@ -5,7 +5,7 @@ const sourceButton = document.getElementById('sourceButton')
 //Prompt to select media stream, pass to video element, then play
 async function selectMediaStream() {
     try {
-        const mediaStream = await navigator.mediaDevices.getDisplayMedia() //permission of screenshare
+        const mediaStream = await navigator.mediaDevices.getDisplayMedia() //web API, permission of screenshare
         videoElement.srcObject = mediaStream // store the connected video element into srcObject 
         // display the screenshare video in the video element 
         videoElement.onloadeddata = () => {
@@ -37,14 +37,14 @@ startButton.addEventListener('click', async () => {
 })
 
 //Stop the screenshare and set the video srcObject = null
-function stopCapture(evt) {
-    let tracks = videoElement.srcObject.getTracks();
+async function stopCapture(evt) {
+    let tracks = await videoElement.srcObject.getTracks();
     tracks.forEach(track => track.stop());
     videoElement.srcObject = null;
 }
 
 
-//video event listener
+//video event listener enterpictureinpicture event and leavepictureinpicture event
 videoElement.addEventListener('enterpictureinpicture', () => {
     startButton.innerText = 'STOP';
 });

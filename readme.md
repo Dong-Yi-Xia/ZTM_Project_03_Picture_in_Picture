@@ -14,7 +14,7 @@ Capturing screen contents as a live MediaStream is initiated by calling navigato
 
 Navigator.mediaDevices <br>
 https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaDevices <br>
-Provides access to connected media input devices like cameras and microphones, as well as screen sharing.<br>
+Web API, Provides access to connected media input devices like cameras and microphones, as well as screen sharing.<br>
 
 HTMLMediaElement <br>
 https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event <br>
