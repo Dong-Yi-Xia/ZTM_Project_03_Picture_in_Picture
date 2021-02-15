@@ -17,7 +17,15 @@ async function selectMediaStream() {
     }
 }
 
-sourceButton.addEventListener('click', selectMediaStream)
+
+sourceButton.addEventListener('click',  () => {
+    stopCapture() //If there is a screenshare is use, stop it first
+    if (document.pictureInPictureElement) { //If there is pic-in-pic in use. Exit and reset start button text
+        document.exitPictureInPicture()
+        startButton.innerText = 'START';
+    }
+    selectMediaStream()
+})
 
 
 startButton.addEventListener('click', async () => {
@@ -45,12 +53,12 @@ async function stopCapture(evt) {
 
 
 //video event listener enterpictureinpicture event and leavepictureinpicture event
-videoElement.addEventListener('enterpictureinpicture', () => {
+videoElement.addEventListener('enterpictureinpicture', () => { //on enter picture-in-picture mode
     startButton.innerText = 'STOP';
 });
 
 
-videoElement.addEventListener('leavepictureinpicture', () => { //exit picture-in-picture mode
+videoElement.addEventListener('leavepictureinpicture', () => { //on exit picture-in-picture mode
     startButton.innerText = 'START';
     stopCapture() //Stop the screenshare
 });
