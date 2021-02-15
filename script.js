@@ -20,16 +20,43 @@ async function selectMediaStream() {
 sourceButton.addEventListener('click', selectMediaStream)
 
 startButton.addEventListener('click', async () => {
-    // Display startButton
-    startButton.disable = true
-
-    // Start Picture in Picture
-    await videoElement.requestPictureInPicture()
-    //Reset startButton
-    startButton.disable = false 
+    if (document.pictureInPictureElement) {
+        await document
+          .exitPictureInPicture()
+          .catch(error => {
+            // Error handling
+          })
+      } else {
+        await videoElement
+        .requestPictureInPicture()
+        .catch(error => {
+          // Error handling
+        });
+      }
 })
 
 
+videoElement.addEventListener('enterpictureinpicture', () => {
+    startButton.innerText = 'STOP';
+});
+
+
+videoElement.addEventListener('leavepictureinpicture', () => {
+    startButton.innerText = 'START';
+});
+
+
+
+
+// startButton.addEventListener('click', async () => {
+//     // Display startButton
+//     startButton.disable = true
+
+//     // Start Picture in Picture
+//     await videoElement.requestPictureInPicture()
+//     //Reset startButton
+//     startButton.disable = false 
+// })
 
 
 // On Load
